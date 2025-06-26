@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🧠 Sree Smart Engine Clone</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="icon" href="https://www.google.com/favicon.ico" />
+</head>
+<body>
+  <div class="container">
+    <h1>🧠 Sree Smart Engine Clone</h1>
+    <form method="POST">
+      <input type="text" name="query" placeholder="Type your search here..." required>
+      <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+      <div class="results">
+        {% for result in results %}
+          <div class="result-card">
+            <h3>{{ result.filename }}</h3>
+            <p><em>Relevance:</em> {{ '{:.2f}'.format(result.score * 100) }}%</p>
+            <p class="snippet">{{ result.snippet }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% elif request.method == 'POST' %}
+      <p>No results found.</p>
+    {% endif %}
+  </div>
+</body>
+</html>
